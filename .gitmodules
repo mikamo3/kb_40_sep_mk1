@@ -1,0 +1,9 @@
+[submodule "lib/kamo3_kicad_library"]
+	path = lib/kamo3_kicad_library
+	url = https://github.com/mikamo3/kamo3_kicad_library.git
+[submodule "lib/kbd"]
+	path = lib/kbd
+	url = https://github.com/foostan/kbd.git
+[submodule "lib/Keebio-Parts.pretty"]
+	path = lib/Keebio-Parts.pretty
+	url = https://github.com/keebio/Keebio-Parts.pretty

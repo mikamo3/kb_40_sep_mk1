@@ -10,10 +10,11 @@ kbd.init_pins(
 )
 
 kbd.add_layer :default, %i(
-KC_ESC  KC_Q   KC_W   KC_E   KC_R   KC_T   KC_MINS     KC_EQL   KC_Y   KC_U   KC_I   KC_O   KC_P   KC_BSPC
-TAB_SFT  KC_A   KC_S   KC_D   KC_F   KC_G   KC_LBRC     KC_RBRC  KC_H   KC_J   KC_K   KC_L   KC_SCLN KC_BSLS
-KC_NO   KC_Z   KC_X   KC_C   KC_V   KC_B   KC_NO       KC_NO    KC_N   KC_M   KC_COMM KC_DOT  KC_SLSH KC_NO
-KC_NO   KC_NO  KC_NO  KC_LALT KC_LGUI RAISE  KC_LCTL   KC_RSFT  LOWER  KC_RGUI KC_RALT KC_NO  KC_NO  KC_NO
+ESC_CTL  KC_Q   KC_W   KC_E    KC_R    KC_T    KC_MINS  KC_EQL  KC_Y   KC_U    KC_I    KC_O    KC_P    KC_BSPC
+TAB_SFT  KC_A   KC_S   KC_D    KC_F    KC_G    KC_LBRC  KC_RBRC KC_H   KC_J    KC_K    KC_L    KC_SCLN KC_BSLS
+KC_NO    KC_Z   KC_X   KC_C    KC_V    KC_B    KC_NO    KC_NO   KC_N   KC_M    KC_COMM KC_DOT  KC_SLSH KC_NO
+KC_NO    KC_NO  KC_NO  KC_LALT KC_LGUI RAISE   ESC_CTL  BS_SFT  LOWER  KC_RGUI KC_RALT KC_NO   KC_NO   KC_NO
+
 )
 kbd.add_layer :raise, %i(
 KC_GRAVE KC_EXLM  KC_AT    KC_HASH  KC_DLR  KC_PERC  KC_DQUO  KC_QUOT  KC_CIRC  KC_AMPR  KC_ASTR  KC_LPRN  KC_RPRN  KC_DEL
@@ -32,25 +33,27 @@ KC_NO   KC_NO   KC_NO   KC_LALT KC_LGUI RAISE  KC_LCTL KC_RSFT LOWER   KC_RGUI K
 kbd.define_mode_key :RAISE, [ :KC_SPACE, :raise, 200, 200 ]
 kbd.define_mode_key :LOWER, [ :KC_ENT, :lower, 200, 200 ]
 kbd.define_mode_key :TAB_SFT, [ :KC_TAB, :KC_LSFT, 200, 200 ]
-kbd.define_composite_key :EN_JA,   %i(:KC_LALT :KC_GRAVE)
+kbd.define_mode_key :ESC_CTL, [ :KC_ESC, :KC_LCTL, 200, 200 ]
+kbd.define_mode_key :BS_SFT, [ :KC_BSPC, :KC_RSFT, 200, 200 ]
+kbd.define_composite_key :EN_JA,   %i(KC_LALT KC_GRAVE)
 
 encoder_1 = RotaryEncoder.new(14, 15)
 encoder_1.configure :left
 encoder_1.clockwise do
-  kbd.send_key :KC_DOWN
+  kbd.send_key %i(KC_LGUI KC_DOWN)
 end
 encoder_1.counterclockwise do
-  kbd.send_key :KC_UP
+  kbd.send_key %i(KC_LGUI KC_UP)
 end
 kbd.append encoder_1
 
 encoder_2 = RotaryEncoder.new(14, 15)
 encoder_2.configure :right
 encoder_2.clockwise do
-  kbd.send_key :KC_1
+  kbd.send_key %i(KC_LGUI KC_LEFT)
 end
 encoder_2.counterclockwise do
-  kbd.send_key :KC_2
+  kbd.send_key %i(KC_LGUI KC_RIGHT)
 end
 kbd.append encoder_2
 rgb = RGB.new(
